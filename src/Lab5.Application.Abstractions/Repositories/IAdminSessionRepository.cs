@@ -5,7 +5,7 @@ namespace Lab5.Application.Abstractions.Repositories;
 
 public interface IAdminSessionRepository
 {
-    AdminSession Add(AdminSession session);
+    void Add(AdminSession session);
 
-    IEnumerable<UserSession> Query(AdminSessionQuery query);
+    IEnumerable<AdminSession> Query(AdminSessionQuery query);
 }

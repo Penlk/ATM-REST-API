@@ -36,10 +36,10 @@ public class Account
             TypeOperation.WithDraw));
     }
 
-    public OperationHistory Replenish(Money money, OperationHistoryId operationHistoryId)
+    public OperationHistory Replenish(Money money)
     {
         Money += money;
 
-        return new OperationHistory(operationHistoryId, UserSessionKey.NextKey, Id, TypeOperation.Replenish);
+        return new OperationHistory(OperationHistoryId.Default, UserSessionKey.NextKey, Id, TypeOperation.Replenish);
     }
 }

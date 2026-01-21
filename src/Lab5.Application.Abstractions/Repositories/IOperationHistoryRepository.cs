@@ -7,5 +7,5 @@ public interface IOperationHistoryRepository
 {
     OperationHistory Add(OperationHistory operationHistory);
 
-    IEnumerable<OperationHistoryQuery> Query(OperationHistoryQuery query);
+    IEnumerable<OperationHistory> Query(OperationHistoryQuery query);
 }

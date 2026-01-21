@@ -1,6 +1,6 @@
 namespace Lab5.Application.Contracts.Accounts.Operations;
 
-public class WithDrawBalanceAccount
+public class WithDrawAccountBalance
 {
     public readonly record struct Request(Guid SessionKey);
 

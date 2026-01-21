@@ -8,7 +8,7 @@ public interface IPersistenceContext
 
     IUserSessionRepository UserSessions { get; }
 
-    IAdminSessionRepository AdminSession { get; }
+    IAdminSessionRepository AdminSessions { get; }
 
     IOperationHistoryRepository Operations { get; }
 }

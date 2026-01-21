@@ -4,7 +4,14 @@ namespace Lab5.Application.Contracts.Accounts.Operations;
 
 public static class CreateAccount
 {
-    public readonly record struct Request(string PinCode);
+    public readonly record struct Request(Guid AdminKey, string PinCode);
 
-    public readonly record struct Response(AccountDto AccountDto);
+    public abstract record Response
+    {
+        private Response() { }
+
+        public sealed record Successfully(AccountDto AccountDto) : Response;
+
+        public sealed record Failure(string Message) : Response;
+    }
 }
