@@ -1,4 +1,4 @@
-namespace Lab5.Domain.OperationHIstories;
+namespace Lab5.Domain.OperationHistories;
 
 public readonly record struct OperationHistoryId(long Value)
 {

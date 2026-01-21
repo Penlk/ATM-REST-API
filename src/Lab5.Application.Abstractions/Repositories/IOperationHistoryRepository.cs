@@ -1,7 +1,7 @@
-using Lab5.Applicaiton.Abstractions.Queries;
-using Lab5.Domain.OperationHIstories;
+using Lab5.Application.Abstractions.Queries;
+using Lab5.Domain.OperationHistories;
 
-namespace Lab5.Applicaiton.Abstractions.Repositories;
+namespace Lab5.Application.Abstractions.Repositories;
 
 public interface IOperationHistoryRepository
 {
