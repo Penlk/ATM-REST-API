@@ -42,6 +42,25 @@ public class SessionService : ISessionService
         return new CreateUserSession.Response.Successfully(userSession.MapToDto());
     }
 
+    public CreateAdminSession.Response CreateAdminSession(CreateAdminSession.Request request)
+    {
+        var password = new SystemPassword(request.Password);
+
+        SystemPassword? systemPassword =
+            _context.SystemPasswords.Query(SystemPasswordQuery.Build(builder => builder.WithPassword(password)))
+                .SingleOrDefault();
+
+        if (systemPassword is null)
+        {
+            return new CreateAdminSession.Response.Failure("Could not find password");
+        }
+
+        var adminSession = new AdminSession(AdminSessionKey.NextKey, systemPassword);
+        _context.AdminSessions.Add(adminSession);
+
+        return new CreateAdminSession.Response.Successfully(adminSession.MapToDto());
+    }
+
     private Account? FindAccount(AccountId accountId)
     {
         AccountQuery query = new AccountQuery.Builder().WithAccountId(accountId).Build();

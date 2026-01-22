@@ -15,6 +15,7 @@ public static class ServiceCollectionExtensions
         collection.AddSingleton<IAdminSessionRepository, AdminSessionRepository>();
         collection.AddSingleton<IUserSessionRepository, UserSessionRepository>();
         collection.AddSingleton<IOperationHistoryRepository, OperationHistoryRepository>();
+        collection.AddSingleton<ISystemPasswordRepository, SystemPa
 
         return collection;
     }

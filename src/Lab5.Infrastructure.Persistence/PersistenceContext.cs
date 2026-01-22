@@ -9,12 +9,14 @@ public class PersistenceContext : IPersistenceContext
         IAccountRepository accounts,
         IUserSessionRepository userSessions,
         IAdminSessionRepository adminSessions,
-        IOperationHistoryRepository operations)
+        IOperationHistoryRepository operations,
+        ISystemPasswordRepository systemPasswords)
     {
         Accounts = accounts;
         UserSessions = userSessions;
         AdminSessions = adminSessions;
         Operations = operations;
+        SystemPasswords = systemPasswords;
     }
 
     public IAccountRepository Accounts { get; }
@@ -24,4 +26,6 @@ public class PersistenceContext : IPersistenceContext
     public IAdminSessionRepository AdminSessions { get; }
 
     public IOperationHistoryRepository Operations { get; }
+
+    public ISystemPasswordRepository SystemPasswords { get; }
 }

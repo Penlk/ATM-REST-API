@@ -11,4 +11,6 @@ public interface IPersistenceContext
     IAdminSessionRepository AdminSessions { get; }
 
     IOperationHistoryRepository Operations { get; }
+
+    ISystemPasswordRepository SystemPasswords { get; }
 }
