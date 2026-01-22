@@ -2,7 +2,7 @@ namespace Lab5.Application.Contracts.Accounts.Operations;
 
 public class WithDrawAccountBalance
 {
-    public readonly record struct Request(Guid SessionKey);
+    public readonly record struct Request(Guid SessionKey, int Money);
 
     public abstract record Response
     {

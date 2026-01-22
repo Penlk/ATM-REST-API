@@ -1,9 +1,8 @@
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Lab5.Domain.ValueObjects;
 
-public readonly struct PinCode
+public readonly struct PinCode : IEquatable<PinCode>
 {
     public PinCode(string pinCode)
     {
@@ -11,7 +10,25 @@ public readonly struct PinCode
     }
 
     [Length(4, 4)]
-    [NotNull]
     [Required]
-    public string? Value { get; }
+    public string Value { get; }
+
+    public bool Equals(PinCode other)
+    {
+        return Value == other.Value;
+    }
+
+    public override bool Equals(object? obj)
+    {
+        return obj is PinCode other && Equals(other);
+    }
+
+    public override int GetHashCode()
+    {
+        return Value.GetHashCode(StringComparison.Ordinal);
+    }
+
+    public static bool operator ==(PinCode left, PinCode right) => left.Value == right.Value;
+
+    public static bool operator !=(PinCode left, PinCode right) => left.Value != right.Value;
 }

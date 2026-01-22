@@ -1,9 +1,10 @@
 using Lab5.Application.Abstractions.Queries;
+using Lab5.Application.Abstractions.Repositories;
 using Lab5.Domain.Sessions;
 
 namespace Lab5.Infrastructure.Persistence.Repositories;
 
-public class UserSessionRepository
+public class UserSessionRepository : IUserSessionRepository
 {
     private readonly Dictionary<UserSessionKey, UserSession> _store = new Dictionary<UserSessionKey, UserSession>();
 
@@ -14,6 +15,6 @@ public class UserSessionRepository
 
     public IEnumerable<UserSession> Query(UserSessionQuery query)
     {
-        return _store.Where(x => query.SessionKeys.Contains(x.Key)).Select(x => x.Value);
+        return query.SessionKeys.Where(x => _store.ContainsKey(x)).Select(x => _store[x]);
     }
 }

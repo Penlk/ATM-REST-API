@@ -20,7 +20,7 @@ public class Account
 
     public Money Money { get; private set; }
 
-    public WithDrawMoneyResult WithDraw(Money money, OperationHistoryId operationHistoryId)
+    public WithDrawMoneyResult WithDraw(Money money)
     {
         if (Money < money)
         {
@@ -30,7 +30,7 @@ public class Account
         Money -= money;
 
         return new WithDrawMoneyResult.Successfully(new OperationHistory(
-            operationHistoryId,
+            OperationHistoryId.Default,
             UserSessionKey.NextKey,
             Id,
             TypeOperation.WithDraw));

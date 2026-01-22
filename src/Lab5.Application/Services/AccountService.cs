@@ -4,6 +4,7 @@ using Lab5.Application.Contracts.Accounts;
 using Lab5.Application.Contracts.Accounts.Operations;
 using Lab5.Application.Mapping;
 using Lab5.Domain.Accounts;
+using Lab5.Domain.Accounts.Results;
 using Lab5.Domain.OperationHistories;
 using Lab5.Domain.Sessions;
 using Lab5.Domain.ValueObjects;
@@ -85,21 +86,31 @@ public class AccountService : IAccountService
 
         if (session is null)
         {
-            return new ReplenishAccountBalance.Response.Failure("No user's session found");
+            return new WithDrawAccountBalance.Response.Failure("No user's session found");
         }
 
         Account? account = FindAccount(session.AccountId);
 
         if (account is null)
         {
-            return new ReplenishAccountBalance.Response.Failure("No account found");
+            return new WithDrawAccountBalance.Response.Failure("No account found");
         }
 
-        OperationHistory operation = account.Replenish(new Money(request.Money));
+        WithDrawMoneyResult operationResult = account.WithDraw(new Money(request.Money));
 
-        _context.Operations.Add(operation);
+        if (operationResult is WithDrawMoneyResult.Failure fail)
+        {
+            return new WithDrawAccountBalance.Response.Failure(fail.Message);
+        }
 
-        return new ReplenishAccountBalance.Response.Successfully(account.Money.Value);
+        if (operationResult is WithDrawMoneyResult.Successfully successfully)
+        {
+            _context.Operations.Add(successfully.OperationHistory);
+
+            return new WithDrawAccountBalance.Response.Successfully(account.Money.Value);
+        }
+
+        return new WithDrawAccountBalance.Response.Failure("Failed to withdraw");
     }
 
     private UserSession? FindUserSession(Guid userSessionId)

@@ -15,6 +15,6 @@ public class AdminSessionRepository : IAdminSessionRepository
 
     public IEnumerable<AdminSession> Query(AdminSessionQuery query)
     {
-        return _store.Where(x => query.SessionKeys.Contains(x.Key)).Select(x => x.Value);
+        return query.SessionKeys.Where(x => _store.ContainsKey(x)).Select(x => _store[x]);
     }
 }

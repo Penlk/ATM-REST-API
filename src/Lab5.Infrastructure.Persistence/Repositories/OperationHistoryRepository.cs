@@ -1,13 +1,14 @@
 using Lab5.Application.Abstractions.Queries;
 using Lab5.Application.Abstractions.Repositories;
 using Lab5.Domain.OperationHistories;
+using Lab5.Domain.Sessions;
 
 namespace Lab5.Infrastructure.Persistence.Repositories;
 
 public class OperationHistoryRepository : IOperationHistoryRepository
 {
-    private readonly Dictionary<OperationHistoryId, OperationHistory> _store =
-        new Dictionary<OperationHistoryId, OperationHistory>();
+    private readonly Dictionary<UserSessionKey, OperationHistory> _store =
+        new Dictionary<UserSessionKey, OperationHistory>();
 
     private long _lastId = 0;
 
@@ -20,13 +21,13 @@ public class OperationHistoryRepository : IOperationHistoryRepository
             operationHistory.AccountId,
             operationHistory.Operation);
 
-        _store.Add(newOperationHistory.Id, newOperationHistory);
+        _store.Add(operationHistory.UserSessionId, newOperationHistory);
 
         return newOperationHistory;
     }
 
     public IEnumerable<OperationHistory> Query(OperationHistoryQuery query)
     {
-        return _store.Where(x => query.HistoryIds.Contains(x.Key)).Select(x => x.Value);
+        return query.UserSessionKeys.Where(x => _store.ContainsKey(x)).Select(x => _store[x]);
     }
 }

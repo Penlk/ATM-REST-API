@@ -21,6 +21,6 @@ public class AccountRepository : IAccountRepository
 
     public IEnumerable<Account> Query(AccountQuery query)
     {
-        return _store.Where(x => query.AccountIds.Contains(x.Key)).Select(x => x.Value);
+        return query.AccountIds.Where(x => _store.ContainsKey(x)).Select(x => _store[x]);
     }
 }

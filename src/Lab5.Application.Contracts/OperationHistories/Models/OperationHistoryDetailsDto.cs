@@ -1,3 +1,3 @@
 namespace Lab5.Application.Contracts.OperationHistories.Models;
 
-public record OperationHistoryDetailsDto(IReadOnlyList<OperationHistoryDto> OperationHistories);
+public record OperationHistoryDetailsDto(IReadOnlyCollection<OperationHistoryDto> OperationHistories);
