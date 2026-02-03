@@ -4,7 +4,7 @@ using Lab5.Presentation.Http;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddApplication().AddInfrastructurePersistence().AddPresentationHttp();
+builder.Services.AddApplication().AddInfrastructurePersistence("admin123").AddPresentationHttp();
 
 builder.Services.AddSwaggerGen().AddEndpointsApiExplorer();
 
