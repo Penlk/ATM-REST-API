@@ -1,6 +1,5 @@
 using Lab5.Domain.Accounts.Results;
 using Lab5.Domain.OperationHistories;
-using Lab5.Domain.Sessions;
 using Lab5.Domain.ValueObjects;
 
 namespace Lab5.Domain.Accounts;
@@ -31,7 +30,6 @@ public class Account
 
         return new WithDrawMoneyResult.Successfully(new OperationHistory(
             OperationHistoryId.Default,
-            UserSessionKey.NextKey,
             Id,
             TypeOperation.WithDraw));
     }
@@ -40,6 +38,6 @@ public class Account
     {
         Money += money;
 
-        return new OperationHistory(OperationHistoryId.Default, UserSessionKey.NextKey, Id, TypeOperation.Replenish);
+        return new OperationHistory(OperationHistoryId.Default, Id, TypeOperation.Replenish);
     }
 }

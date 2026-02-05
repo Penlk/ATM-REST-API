@@ -6,12 +6,12 @@ namespace Lab5.Application.Mapping;
 
 public static class OperationHistoryMappingExtensions
 {
-    public static TypeOperationDto MapToDto(this TypeOperation typeOperation)
+    public static string MapToDto(this TypeOperation typeOperation)
     {
         return typeOperation switch
         {
-            TypeOperation.Replenish => TypeOperationDto.Replenish,
-            TypeOperation.WithDraw => TypeOperationDto.WithDraw,
+            TypeOperation.Replenish => "Replenish",
+            TypeOperation.WithDraw => "With draw",
             _ => throw new UnreachableException(),
         };
     }
@@ -20,7 +20,6 @@ public static class OperationHistoryMappingExtensions
     {
         return new OperationHistoryDto(
             operationHistory.Id.Value,
-            operationHistory.UserSessionId.Id,
             operationHistory.AccountId.Value,
             operationHistory.Operation.MapToDto());
     }
