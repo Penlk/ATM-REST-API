@@ -1,6 +1,7 @@
 using Lab5.Application.Contracts.Accounts;
 using Lab5.Application.Contracts.OperationHistories;
 using Lab5.Application.Contracts.Sessions;
+using Lab5.Application.Contracts.SystemPasswords;
 using Lab5.Application.Services;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,6 +14,7 @@ public static class ServiceCollectionExtensions
         collection.AddScoped<IAccountService, AccountService>();
         collection.AddScoped<ISessionService, SessionService>();
         collection.AddScoped<IOperationHistoryService, OperationHistoryService>();
+        collection.AddScoped<ISystemPasswordService, SystemPasswordService>();
 
         return collection;
     }

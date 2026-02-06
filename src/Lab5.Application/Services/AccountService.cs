@@ -25,9 +25,9 @@ public class AccountService : IAccountService
         var adminSessionKey = new AdminSessionKey(request.AdminKey);
         AdminSessionQuery adminSessionQuery = new AdminSessionQuery.Builder().WithSessionKey(adminSessionKey).Build();
 
-        IEnumerable<AdminSession> admins = _context.AdminSessions.Query(adminSessionQuery).ToList();
+        AdminSession? admin = _context.AdminSessions.Query(adminSessionQuery).SingleOrDefault();
 
-        if (admins.Any() is false)
+        if (admin is null)
         {
             return new CreateAccount.Response.Failure("No admin session found");
         }
